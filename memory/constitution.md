@@ -46,5 +46,19 @@
 [GOVERNANCE_RULES]
 <!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
 
+
+## Acronym configuration
+
+Below you may define the acronyms used for major artefact types. If you leave any blank, the system will use the default values.
+
+| Artefact type             | Acronym reference     | Acronym (default) |
+|---------------------------|-----------------------|-------------------|
+| Functional Requirement    | `REF_FR`              | `FR`              |
+| Success Criteria          | `REF_SC`              | `SC`              |
+| User Story                | `REF_UST`             | `UST`             |
+| Checklist Item            | `REF_CHK`             | `CHK`             |
+
+Please update the acronyms above if your team uses different conventions, then save this file so the templates can pick up the values.
+
 **Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
 <!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
