@@ -20,7 +20,7 @@
   - Demonstrated to users independently
 -->
 
-### User Story 1 - [Brief Title] (Priority: P1)
+### [UST-001] User Story 1 - [Brief Title] (Priority: P1)
 
 [Describe this user journey in plain language]
 
@@ -35,7 +35,7 @@
 
 ---
 
-### User Story 2 - [Brief Title] (Priority: P2)
+### [UST-002] User Story 2 - [Brief Title] (Priority: P2)
 
 [Describe this user journey in plain language]
 
@@ -49,7 +49,7 @@
 
 ---
 
-### User Story 3 - [Brief Title] (Priority: P3)
+### [UST-003] User Story 3 - [Brief Title] (Priority: P3)
 
 [Describe this user journey in plain language]
 
