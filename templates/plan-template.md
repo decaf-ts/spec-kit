@@ -28,10 +28,17 @@
 **Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
 
 ## Constitution Check
-
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+Constitution Gate — required checks (assistant MUST verify and document results):
+
+- [ ] MCP Tool Discovery recorded in `.specify/memory/mcp-tools.md` (names & versions)
+- [ ] Chosen persistence and UI options are within MCP-supported lists (see memory)
+- [ ] No non-Decaf-supported technology proposed; if present, itemize and propose replacement
+- [ ] Any changes to source code outside `./templates/**/*.md` or `./.specify/memory/**/*.md` have explicit user approval documented in this plan
+
+If any check fails, list the non-compliance items and follow the "Reject Out-of-Scope"
+instructions in the constitution (replace or remove unsupported items before Phase 0).
 
 ## Project Structure
 

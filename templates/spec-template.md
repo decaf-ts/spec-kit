@@ -77,6 +77,17 @@
 
 ## Requirements *(mandatory)*
 
+## Constitution Check (required)
+
+Before Phase 0 can proceed, the author MUST confirm and record the following:
+
+- MCP Tool Discovery is present in `.specify/memory/mcp-tools.md` and lists available Decaf tools/prompts.
+- Any technology specified (database, UI, major libraries) is an MCP-supported option. If not, list the non-compliant items and propose allowed alternatives.
+- Tests and success criteria align with the Constitution's quality and performance requirements.
+
+Mark the Constitution Check status and reference the memory file or plan that resolved any outstanding items.
+
+
 <!--
   ACTION REQUIRED: The content in this section represents placeholders.
   Fill them out with the right functional requirements.

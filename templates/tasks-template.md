@@ -52,6 +52,16 @@ description: "Task list template for feature implementation"
 - [ ] T002 Initialize [language] project with [framework] dependencies
 - [ ] T003 [P] Configure linting and formatting tools
 
+## Constitution Check (Tasks-level)
+
+All generated tasks MUST include at least one task that validates Constitution compliance during Setup/Phase 1. Minimum required tasks to include in Phase 1:
+
+- [ ] T-CON-01 Run MCP discovery and write results to `.specify/memory/mcp-tools.md` (assistant or operator)
+- [ ] T-CON-02 Verify chosen persistence/UI options are allowed per MCP output; if not allowed, create replacement tasks or mark as deferred
+- [ ] T-CON-03 Document and record any explicit approvals required for changes outside `./templates/**/*.md` or `./.specify/memory/**/*.md`
+
+Include these tasks so technology gating and approval steps are visible in the task board and cannot be skipped.
+
 ---
 
 ## Phase 2: Foundational (Blocking Prerequisites)
