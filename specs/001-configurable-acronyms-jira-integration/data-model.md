@@ -1,3 +1,58 @@
+# data-model.md
+
+Entities derived from the feature spec and research decisions.
+
+## AcronymConfig
+
+- id: string (UUID) — internal id for the config entry
+- artifactType: string — e.g., "Requirement", "User Story", "Feature", "Scoring Criteria"
+- acronym: string — short token used as prefix (e.g., "REQ", "USR", "FTR")
+- createdBy: string — user/actor who created the mapping
+- createdAt: datetime — timestamp
+- version: string — constitution config version when added
+
+Validation:
+- `artifactType` required, non-empty
+- `acronym` required, alphanumeric and hyphen/underscore allowed, max length 10
+
+## BranchConfig
+
+- id: string
+- branchAcronym: string — which Acronym (from AcronymConfig) to use for branches
+- enforcePattern: string — regex used to validate branch names (e.g., `^%ACRONYM%-[A-Z0-9_-]+$`)
+
+Validation:
+- `enforcePattern` required when enforcement is enabled
+
+## JiraMapping
+
+- id: string
+- acronym: string — acronym key (must reference AcronymConfig.acronym)
+- jiraIssueType: string — Jira issue type name (e.g., "Task", "Story")
+- jiraProjectKey: string (optional) — optional override for the default Jira project
+
+Validation:
+- `acronym` must exist in AcronymConfig
+
+## UpdateAcronymsRequest (operation payload)
+
+- dryRun: boolean
+- targetPaths: string[] (glob) — files/dirs to scan (defaults to repo root)
+- replacements: { from: string, to: string }[] (optional manual override)
+- createBranch: boolean (default true when apply)
+
+## UpdateAcronymsResult
+
+- changedFiles: string[]
+- summary: {file: string, replacements: number}[]
+- branch: string (if created)
+- commitHash: string (if applied)
+
+## Notes
+
+- Persistence of configuration is file-based in `memory/constitution.md`.
+- Cross-references in spec files should use tokens which are resolved by the
+  template resolver (see `research.md`).
 # Data Model
 
 This file describes the core data shapes used for the Configurable Acronyms feature.

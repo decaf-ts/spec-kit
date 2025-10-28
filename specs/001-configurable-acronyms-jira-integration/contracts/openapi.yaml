@@ -1,0 +1,130 @@
+openapi: 3.0.3
+info:
+  title: SpecKit Acronym & Jira Integration API (design)
+  version: "1.0.0"
+paths:
+  /acronyms:
+    get:
+      summary: List configured acronyms
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AcronymConfig'
+    post:
+      summary: Add or update an acronym configuration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AcronymConfig'
+      responses:
+        '201':
+          description: Created
+
+  /updateAcronyms:
+    post:
+      summary: Run the acronym update flow (dry-run or apply)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAcronymsRequest'
+      responses:
+        '200':
+          description: Result summary
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateAcronymsResult'
+
+  /branch/validate:
+    post:
+      summary: Validate a branch name against configured mapping
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                branchName:
+                  type: string
+      responses:
+        '200':
+          description: Validation result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  valid:
+                    type: boolean
+                  reason:
+                    type: string
+
+components:
+  schemas:
+    AcronymConfig:
+      type: object
+      properties:
+        artifactType:
+          type: string
+        acronym:
+          type: string
+        createdBy:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        version:
+          type: string
+
+    UpdateAcronymsRequest:
+      type: object
+      properties:
+        dryRun:
+          type: boolean
+          default: true
+        targetPaths:
+          type: array
+          items:
+            type: string
+        replacements:
+          type: array
+          items:
+            type: object
+            properties:
+              from:
+                type: string
+              to:
+                type: string
+        createBranch:
+          type: boolean
+
+    UpdateAcronymsResult:
+      type: object
+      properties:
+        changedFiles:
+          type: array
+          items:
+            type: string
+        summary:
+          type: array
+          items:
+            type: object
+            properties:
+              file:
+                type: string
+              replacements:
+                type: integer
+        branch:
+          type: string
+        commitHash:
+          type: string
