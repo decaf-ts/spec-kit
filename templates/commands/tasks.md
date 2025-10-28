@@ -9,11 +9,17 @@ scripts:
 
 ```text
 $ARGUMENTS
-```
 
 You **MUST** consider the user input before proceeding (if not empty).
 
 ## Outline
+<!--
+Template: templates/commands/tasks.md
+Version: 1.0.0
+Created: 2025-10-28
+Last Amended: 2025-10-28
+Notes: This template references `templates/commands/decaf-ts-extensions.md` for decaf-ts conventions.
+-->
 
 1. **Setup**: Run `{SCRIPT}` from repo root and parse FEATURE_DIR and AVAILABLE_DOCS list. All paths must be absolute. For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
 
@@ -129,3 +135,13 @@ Every task MUST strictly follow this format:
   - Within each story: Tests (if requested) → Models → Services → Endpoints → Integration
   - Each phase should be a complete, independently testable increment
 - **Final Phase**: Polish & Cross-Cutting Concerns
+
+---
+
+## decaf-ts guidance
+
+This template references decaf-ts-specific guidance for LLM-driven flows. If your project
+targets decaf-ts patterns (TypeScript monorepo, strong typing, conventional commits), consult
+`templates/commands/decaf-ts-extensions.md` for concrete conventions and rules to follow when
+generating tasks and implementation artifacts.
+

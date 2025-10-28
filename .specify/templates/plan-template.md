@@ -1,5 +1,14 @@
 # Implementation Plan: [FEATURE]
 
+<!--
+Template: .specify/templates/plan-template.md
+Version: 1.0.0
+Created: 2025-10-28
+Last Amended: 2025-10-28
+Notes: Run a Constitution Check against `.specify/memory/constitution.md` and consult
+  `templates/commands/decaf-ts-extensions.md` when targeting decaf-ts patterns.
+-->
+
 **Branch**: `[###-feature-name]` | **Date**: [DATE] | **Spec**: [link]
 **Input**: Feature specification from `/specs/[###-feature-name]/spec.md`
 
@@ -8,6 +17,10 @@
 ## Summary
 
 [Extract from feature spec: primary requirement + technical approach from research]
+
+> NOTE: Validate the plan against `.specify/memory/constitution.md` (Constitution Check) and
+> consult `templates/commands/decaf-ts-extensions.md` when the feature targets decaf-ts
+> conventions (TypeScript monorepo, strict typing, conventional commits).
 
 ## Technical Context
 

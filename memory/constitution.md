@@ -1,5 +1,13 @@
 # Project Constitution
 
+<!--
+Template: memory/constitution.md
+Version: 1.0.0
+Created: 2025-10-28
+Last Amended: 2025-10-28
+Notes: This is a template containing placeholders (HTML comments like `<!-- Example: ... -->`). Always interpret those comments as placeholders to be filled when creating a project-specific constitution.
+-->
+
 ## Purpose
 [PROJECT_NAME] – Project Constitution  
 This document defines the immutable principles that govern how we develop features, produce specifications, and deliver implementations. It sets the foundation for all subsequent steps in our Spec-Driven Development workflow.

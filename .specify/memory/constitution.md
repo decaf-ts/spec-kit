@@ -1,50 +1,92 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report
+
+Version change: unknown → 1.0.0
+Modified principles:
+- PRINCIPLE_1_NAME (template) → "I. Library-First & Type Safety"
+- PRINCIPLE_2_NAME (template) → "II. CLI & Tooling Contract"
+- PRINCIPLE_3_NAME (template) → "III. Test-First (NON-NEGOTIABLE)"
+- PRINCIPLE_4_NAME (template) → "IV. Integration & Contract Testing"
+- PRINCIPLE_5_NAME (template) → "V. Observability, Versioning & Simplicity"
+Added sections:
+- Development Workflow
+- Compliance & Release Policy
+Removed sections:
+- None
+Templates requiring updates:
+- .specify/templates/plan-template.md ✅ updated
+- .specify/templates/spec-template.md ✅ updated
+- .specify/templates/tasks-template.md ✅ updated
+- templates/commands/tasks.md ✅ updated (referencing decaf-ts guidance)
+Follow-up TODOs:
+- RATIFICATION_DATE: TODO (original ratification date unknown)
+-->
+
+# Decaf Spec Kit Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Library-First & Type Safety
+All new features MUST be created as modular packages (monorepo-friendly) with clear public
+APIs. Each package MUST include a minimal surface area, explicit types, and a focused test
+surface. Rationale: decaf-ts projects rely on strong static typing and composable packages to
+enable safe refactors and clear upgrade paths.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. CLI & Tooling Contract
+All runtime developer workflows MUST be automatable via the CLI (the `specify` tool and any
+project-provided scripts). Tooling MUST expose deterministic, scriptable interfaces (stdin/args
+→ stdout/exit codes) and support both human-readable and machine-readable outputs (JSON).
+Rationale: predictable CLI contracts make the project reproducible and easier for LLM-driven
+automation to consume.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. Test-First (NON-NEGOTIABLE)
+Tests MUST be written before implementation for any non-trivial behavior. The accepted flow is:
+1) Write tests (unit/contract/integration) → 2) See failing tests → 3) Implement minimal code →
+4) Refactor while keeping tests green. Rationale: Ensures correctness, reduces regressions, and
+enables reliable LLM-driven implementation steps.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. Integration & Contract Testing
+All cross-package interactions and public HTTP/gRPC contracts MUST have integration or contract
+tests. Contract tests are prioritized for library boundaries and third-party integrations. Rationale:
+Early detection of interface mismatches avoids costly rollbacks and keeps automated flows safe.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. Observability, Versioning & Simplicity
+Every package MUST include structured logging, clear error codes, and minimal, documented
+telemetry points. Versioning MUST follow semantic versioning (MAJOR.MINOR.PATCH). Breaking
+changes MUST be gated by a documented upgrade strategy and migration notes. Prefer simple
+implementations over cleverness (YAGNI) unless justified in the plan.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## Development Workflow
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+1. Establish the constitution (this document) early in the project lifecycle.
+2. Create a feature specification with `/speckit.specify` (what + why), then run `/speckit.plan`
+	for the implementation approach (how).
+3. Generate `tasks.md` with `/speckit.tasks`. Tasks MUST map to user stories and be independently
+	testable where possible.
+4. Implementation SHOULD follow Test-First. CI gates MUST run unit, contract, and critical
+	integration tests before merge.
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+## Compliance & Release Policy
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+- Code reviews MUST verify that tests were added/updated where behavior changed.
+- Releases follow conventional commits and semantic versioning. Use changelogs to document
+  breaking changes and migration steps.
+- Security-sensitive changes MUST include threat modeling notes and at least one security
+  review pass before merging to main.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+Amendments to this constitution require the following:
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+1. A proposed amendment document (PR) describing the change, rationale, and migration plan.
+2. Approval by a majority of active maintainers (PR review comments + explicit approval).
+3. Update the `Last Amended` date and increment `CONSTITUTION_VERSION` per semantic rules:
+	- MAJOR: Backward-incompatible governance or principle removals
+	- MINOR: New principle/section added or material expansion
+	- PATCH: Clarifications, wording fixes, or non-semantic refinements
+
+All PRs that change behavior MUST reference the constitution and include a short note on how
+the change conforms to or departs from these principles.
+
+**Version**: 1.0.0 | **Ratified**: TODO(RATIFICATION_DATE) | **Last Amended**: 2025-10-28
+

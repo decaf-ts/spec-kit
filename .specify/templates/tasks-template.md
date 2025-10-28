@@ -5,6 +5,14 @@ description: "Task list template for feature implementation"
 
 # Tasks: [FEATURE NAME]
 
+<!--
+Template: .specify/templates/tasks-template.md
+Version: 1.0.0
+Created: 2025-10-28
+Last Amended: 2025-10-28
+Notes: Run Constitution Check before generating tasks. See `templates/commands/decaf-ts-extensions.md` for decaf-ts conventions.
+-->
+
 **Input**: Design documents from `/specs/[###-feature-name]/`
 **Prerequisites**: plan.md (required), spec.md (required for user stories), research.md, data-model.md, contracts/
 
@@ -24,6 +32,11 @@ description: "Task list template for feature implementation"
 - **Web app**: `backend/src/`, `frontend/src/`
 - **Mobile**: `api/src/`, `ios/src/` or `android/src/`
 - Paths shown below assume single project - adjust based on plan.md structure
+
+> NOTE: Before generating concrete tasks, run a Constitution Check against
+> `.specify/memory/constitution.md`. If the feature targets decaf-ts conventions,
+> consult `templates/commands/decaf-ts-extensions.md` for naming, layout, and test
+> generation rules.
 
 <!-- 
   ============================================================================

@@ -1,5 +1,14 @@
 # Feature Specification: [FEATURE NAME]
 
+<!--
+Template: .specify/templates/spec-template.md
+Version: 1.0.0
+Created: 2025-10-28
+Last Amended: 2025-10-28
+Notes: Ensure specs comply with `.specify/memory/constitution.md` and consult
+  `templates/commands/decaf-ts-extensions.md` for decaf-ts patterns if applicable.
+-->
+
 **Feature Branch**: `[###-feature-name]`  
 **Created**: [DATE]  
 **Status**: Draft  
@@ -23,6 +32,10 @@
 ### User Story 1 - [Brief Title] (Priority: P1)
 
 [Describe this user journey in plain language]
+
+> NOTE: Ensure these user stories comply with `.specify/memory/constitution.md` and, if
+> targeting decaf-ts patterns, consult `templates/commands/decaf-ts-extensions.md` for
+> concrete implementation constraints (monorepo layout, strict types, test-first guidance).
 
 **Why this priority**: [Explain the value and why it has this priority level]
 
