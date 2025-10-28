@@ -69,12 +69,12 @@ Acceptance Scenarios:
 - **ACR-004**: Chosen acronyms MUST be persisted in `memory/constitution.md` under a dedicated `Acronyms` section and include metadata (author, timestamp, version bump entry).
 - **ACR-005**: Templates in `templates/` MUST use placeholders that are resolved to the configured acronyms when generating spec files. Existing placeholder patterns must be updated to be dynamic (no hard-coded FR/USR/etc.).
 - **ACR-006**: Numbering sequences MUST be maintained per artifact type and rendered as `<ACRONYM>-<sequential-number>`; cross-references inside specs MUST use updated prefixes.
-- **ACR-007**: Provide a CLI/assistant command `speckit.updateAcronyms` (or similar) that: suggests defaults, accepts overrides, updates `memory/constitution.md`, updates `templates/`, and optionally scans & updates existing spec files.
+- **ACR-007**: Provide a CLI/assistant command `speckit.updateAcronyms` (or similar) that: suggests defaults, accepts overrides, updates `.specify/memory/constitution.md`, updates `templates/`, and optionally scans & updates existing spec files.
 - **ACR-008**: Running the acronym update that modifies project files MUST create a feature branch, commit changes, and increment the constitution version. The operation must be reversible via normal git workflows.
 - **ACR-009**: Branch naming configuration MUST be persisted in the constitution (a mapping selecting which artifact acronym to use for branches). The enforced branch name format is `<ACRONYM>-<JIRA_OR_SEQUENCE>`.
 - **ACR-010**: When creating or switching to a branch for a new spec/feature, SpecKit MUST validate the branch name matches `<ACRONYM>-<number>` for a configured acronym and either warn or refuse otherwise.
-- **ACR-011**: Provide configuration to enable/disable use of `@decaf-ts/mcp-server` accelerated features. Defaults to enabled.
-- **ACR-012**: Integrations with Jira MUST use `@decaf-ts/mcp-server` for authentication and interactions where available; when unavailable or failing, fall back to local numbering with an explicit warning logged into the spec header.
+- **ACR-011**: SpecKit operations that involve spec loading, tool execution, Jira/agent orchestration, or any constitution-driven automation MUST use `@decaf-ts/mcp-server` as the orchestration and authentication layer. Implementations SHALL perform MCP discovery on first-run (constitution initialization) and consult `.specify/memory/mcp-tools.md` for permitted tools and integrations. Any CLI/UX flag that suggests disabling MCP MUST only enable a documented local testing stub (for offline developer testing) and MUST present a clear, persistent warning that this mode is not permitted for constitution-driven or production workflows unless a constitution amendment explicitly authorizes it.
+- **ACR-012**: Integrations with Jira MUST attempt to use `@decaf-ts/mcp-server` for authentication and interactions. If MCP is unavailable, the implementation MUST fail fast with a clear user-facing error and remediation steps (for example: verify MCP connectivity or credentials). Silent fallback to local numbering or non-MCP behaviors is disallowed for constitution-driven workflows. Any permitted fallback behavior must be introduced via a constitution amendment that documents the scope, approvals, and audit requirements; fallback actions must be auditable, written into `.specify/memory/constitution.md`, and include a remediation plan.
 - **ACR-013**: Provide a mapping configuration `Acronym -> JiraIssueType` in the constitution. This mapping is used when creating Jira issues for Specs, Features, and Scoring Criteria.
 - **ACR-014**: When creating a spec element, the workflow MUST prompt for an existing Jira key or create a Jira issue of the mapped issue type and use the returned key as the spec identifier.
 - **ACR-015**: All changes to acronyms, branch mapping, or Decaf toggle MUST be treated as constitution amendments and trigger a version bump recorded in constitution metadata.
@@ -120,7 +120,7 @@ The following decisions were provided by the project owner and are incorporated 
    - Policy: Branch names MUST correspond to the Jira ticket key for the work item (for example `PROJ-123` or `SPEC-45`), and SpecKit will enforce validation that a branch name matches a configured acronym mapping and a numeric/key suffix.
    - Renaming policy (assumption): SpecKit will not automatically rename existing git branches by default. The acronym update command offers an opt-in, interactive renaming mode that proposes branch renames and requires explicit user confirmation per-branch. This keeps migration safe while allowing teams to adopt the new convention when ready.
 
-These decisions are persisted in the migration plan and will be added to `memory/constitution.md` as a constitution amendment (see Migration Plan step 1).
+These decisions are persisted in the migration plan and will be added to `.specify/memory/constitution.md` as a constitution amendment (see Migration Plan step 1).
 
 3. Jira creation flow (Clarified):
 
@@ -142,7 +142,7 @@ These decisions are persisted in the migration plan and will be added to `memory
 
 ## Migration Plan
 
-1. Add `Acronyms` and `BranchNaming` sections to `memory/constitution.md` (this spec includes proposed text).
+1. Add `Acronyms` and `BranchNaming` sections to `.specify/memory/constitution.md` (this spec includes proposed text).
 2. Implement `speckit.updateAcronyms` as a CLI flow that:
    - Loads defaults from `templates/`
    - Prompts user for confirmation/overrides

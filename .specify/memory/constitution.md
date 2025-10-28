@@ -35,6 +35,30 @@ Rationale: Centralizing orchestration through the MCP server ensures consistent
 capabilities, access control, and observable tool execution across all Spec Kit
 projects.
 
+Principle I (Operational assumption — MCP discovery on first-run)
+For concrete SpecKit implementations, the runtime environment is expected to
+have access to the `@decaf-ts/mcp-server`. Implementations MUST perform an MCP
+discovery during the first effective run of the constitution initialization
+(the initial `constitution` or `setup` step). The discovery records available
+MCP tools, allowed persistence and UI frameworks, and any Decaf platform
+constraints into `.specify/memory/mcp-tools.md`. After discovery completes, the
+project will treat MCP as the authoritative orchestration layer for spec
+loading, tool execution, prompt/context gathering, and agent orchestration.
+
+Operational consequences:
+- Implementations SHALL assume MCP availability for constitution-driven
+	operations; code paths that require MCP MUST fail fast with a clear
+	user-facing error if MCP is unavailable, and must not silently fall back to
+	non-MCP behaviors.
+- Any temporary or local-only testing modes that bypass MCP are not permitted
+	for production or constitution-driven operations unless a formal
+	constitution amendment documents and approves them (see Governance). Local
+	stubs for developer testing must be clearly labeled, gated behind tests and
+	CI safeguards, and must not be used in CI/production pipelines.
+- The MCP discovery artifact `.specify/memory/mcp-tools.md` is authoritative
+	for permitted technologies and must be consulted by plan-checks and gating
+	scripts.
+
 ### II. Framework-Supported Tech Only (NON-NEGOTIABLE)
 All chosen technologies (persistence layers, UI frameworks, core libraries, and
 deployment platforms) MUST be drawn exclusively from the set of technologies
