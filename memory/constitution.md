@@ -57,29 +57,42 @@ This document defines the immutable principles that govern how we develop featur
 [GOVERNANCE_RULES]
 <!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
 
-[ACRONYMS]
-<!-- Example:
-Below you may define the acronyms used for major artefact types. If you leave any blank, the system will use the default values shown.
+## Acronyms
 
-| Artefact type             | Acronym to user | Acronym (default)|
-|---------------------------|-----------------|------------------|
-| Functional Requirement    | `TR`            | `TR`             |
-| Success Criteria          | `SC`            | `SC`             |
-| User Story                | `UST`           | `UST`            |
-| Checklist Item            | `CHK`           | `CHK`            |
+Below you may define the acronyms used for major artefact types. If you leave any blank, the system will use the default values shown. Changes to these values are constitution amendments and must be recorded with a version bump.
 
-*Please update the acronyms above if your team uses different conventions, then save this file so the templates can pick up the values.*-->
+| Artefact type             | Acronym to user | Acronym (default) |
+|---------------------------|-----------------|-------------------|
+| Functional Requirement    | `FR`            | `FR`              |
+| User Story                | `USR`           | `USR`             |
+| Feature / Specification   | `FTR`           | `FTR`             |
+| Scoring Criteria / Test   | `TC`            | `TC`              |
+| Success Criteria          | `SC`            | `SC`              |
+| Checklist Item            | `CHK`           | `CHK`             |
 
-[BRANCH NAMING CONVENTION]
-***Branch names MUST follow the following pattern ***
-<!-- Example: `<SPEC_ID> - <SPEC_NAME>` -->
+*Please update the acronyms above if your team uses different conventions, then save this file so the templates can pick up the values.*
 
-[TOOLS]
-<!-- Example: 
-- JIRA_INTEGRATION via atlassian-mcp;
-- CI/CD via github-actions-spec-kit;
--->
+## Branch Naming Convention
+
+Branch naming is configurable. Define which artifact acronym should be used as the canonical branch prefix. The enforced pattern is: `<ACRONYM>-<ISSUE_OR_SEQUENCE>` where `<ACRONYM>` is one of the configured acronyms above. Teams should prefer using a Jira key where possible.
+
+Example configuration entry (to be machine-readable in memory):
+
+```
+BranchConfig:
+	branchAcronym: "FTR"        # Which acronym is used as the branch prefix
+	enforcePattern: "{ACRONYM}-{NUMBER_OR_JIRAKEY}"
+```
+
+Changing the branch naming configuration is an amendment to the Constitution and must be recorded in the amendment log (see Governance).
+
+## Tools & Integrations
+
+Use this section to declare available integrations and tools. By default SpecKit will attempt to use the Decaf MCP server utilities where available for code generation and Jira interactions.
+
+- JIRA_INTEGRATION: via `@decaf-ts/mcp-server` (preferred)
+- CI/CD: `github-actions-spec-kit` (or project-specific pipelines)
 
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
+**Version**: 1.1.0 | **Ratified**: 2025-10-28 | **Last Amended**: 2025-10-28
 <!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
