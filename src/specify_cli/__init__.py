@@ -1209,3 +1209,36 @@ def main():
 if __name__ == "__main__":
     main()
 
+
+@app.command("acronyms")
+def acronyms(
+    dry_run: bool = typer.Option(False, "--dry-run", "-n", help="Preview changes without applying"),
+    yes: bool = typer.Option(False, "--yes", "-y", help="Accept suggested defaults non-interactively"),
+    templates_only: bool = typer.Option(False, "--templates-only", help="Limit changes to templates only"),
+):
+    """Placeholder command: speckit.acronyms / speckit.updateAcronyms
+
+    This is a lightweight stub that documents intended behavior. The real
+    implementation should perform a dry-run, present previews, and require
+    explicit confirmation before making repository or Jira changes.
+    """
+
+    show_banner()
+    console.print("[cyan]Speckit acronyms command (stub)[/cyan]")
+    console.print(Panel(
+        "This repository includes an interactive implementation plan for updating acronyms.\n"
+        "Run the repository script or implement the command as described in `specs/*/plan.md`.",
+        title="Note",
+        border_style="yellow"
+    ))
+
+    # Minimal JSON-like summary for scripting convenience (no changes made)
+    summary = {
+        "applied": False,
+        "dry_run": bool(dry_run),
+        "templates_only": bool(templates_only),
+        "note": "This is a stub. Implement speckit.updateAcronyms to perform actual work."
+    }
+
+    console.print(json.dumps(summary, indent=2))
+

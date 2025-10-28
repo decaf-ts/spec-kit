@@ -1,0 +1,47 @@
+openapi: "3.0.0"
+info:
+  title: speckit.updateAcronyms CLI (contract)
+  version: "1.0.0"
+paths: {}
+x-cli:
+  command: speckit.updateAcronyms
+  description: >-
+    CLI flow to configure acronyms, preview replacements, and optionally apply
+    repo-wide changes in a single commit on a new branch.
+  options:
+    - name: --dry-run
+      short: -n
+      description: "Show files and replacements without making changes"
+      required: false
+      type: boolean
+    - name: --yes
+      short: -y
+      description: "Non-interactive accept of suggested defaults (use with caution)"
+      required: false
+      type: boolean
+    - name: --rename-branches
+      description: "Interactive mode to propose branch renames; defaults to off"
+      required: false
+      type: boolean
+    - name: --templates-only
+      description: "Limit changes to templates directory only"
+      required: false
+      type: boolean
+  outputs:
+    success:
+      description: "Summary JSON with filesChanged, proposedBranch, commitSha (if applied)"
+      schema:
+        type: object
+        properties:
+          filesChanged:
+            type: integer
+          files:
+            type: array
+            items:
+              type: string
+          proposedBranch:
+            type: string
+          commitSha:
+            type: string
+    errors:
+      description: "Detailed error messages for Jira/auth/permissions failures"
