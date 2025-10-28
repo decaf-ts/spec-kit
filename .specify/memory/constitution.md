@@ -1,16 +1,12 @@
 <!--
 Sync Impact Report
 
-Version change: unknown → 1.0.0
+Version change: 1.0.0 → 1.1.0
 Modified principles:
-- PRINCIPLE_1_NAME (template) → "I. Library-First & Type Safety"
-- PRINCIPLE_2_NAME (template) → "II. CLI & Tooling Contract"
-- PRINCIPLE_3_NAME (template) → "III. Test-First (NON-NEGOTIABLE)"
-- PRINCIPLE_4_NAME (template) → "IV. Integration & Contract Testing"
-- PRINCIPLE_5_NAME (template) → "V. Observability, Versioning & Simplicity"
+- IV. Integration & Contract Testing → expanded to include language and tooling constraints for integrations
 Added sections:
-- Development Workflow
-- Compliance & Release Policy
+- Development Workflow (expanded: Integration code & test conventions)
+- Integration Coding & Testing Conventions
 Removed sections:
 - None
 Templates requiring updates:
@@ -50,6 +46,23 @@ All cross-package interactions and public HTTP/gRPC contracts MUST have integrat
 tests. Contract tests are prioritized for library boundaries and third-party integrations. Rationale:
 Early detection of interface mismatches avoids costly rollbacks and keeps automated flows safe.
 
+Integration Code & Tooling constraints (project-wide):
+
+- Integrations that provide runnable code MUST be implemented in TypeScript and placed under
+	the `integrations/` directory at the repository root. Rationale: centralizing integration
+	implementations simplifies discovery and enforces type-safety across adapter boundaries.
+- Tests for integration TypeScript code MUST be placed under the top-level `tests/` directory and
+	use Jest for unit and integration testing. Rationale: a single cross-project test location keeps
+	CI wiring and coverage reporting consistent.
+- Build and test commands (repo-standard):
+	- `npm run build` – builds TypeScript integration code
+	- `npm run test:circular` – runs checks for circular dependencies
+	- `npm run test` – runs the Jest test suite
+	These commands MUST be documented in each integration's README (or the repo-level README) and
+	be executable by CI.
+- When integrations depend on external services, include contract-mocks or a local test harness
+	so CI does not require external network access for deterministic runs.
+
 ### V. Observability, Versioning & Simplicity
 Every package MUST include structured logging, clear error codes, and minimal, documented
 telemetry points. Versioning MUST follow semantic versioning (MAJOR.MINOR.PATCH). Breaking
@@ -88,5 +101,5 @@ Amendments to this constitution require the following:
 All PRs that change behavior MUST reference the constitution and include a short note on how
 the change conforms to or departs from these principles.
 
-**Version**: 1.0.0 | **Ratified**: TODO(RATIFICATION_DATE) | **Last Amended**: 2025-10-28
+**Version**: 1.1.0 | **Ratified**: TODO(RATIFICATION_DATE) | **Last Amended**: 2025-10-28
 

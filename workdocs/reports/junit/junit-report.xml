@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="11" failures="0" errors="0" time="0.502">
+  <testsuite name="Injectables" errors="0" failures="0" skipped="0" timestamp="2025-10-27T09:52:18" time="0.397" tests="11">
+    <testcase classname="Injectables Instantiates Properly Initial Object" name="Injectables Instantiates Properly Initial Object" time="0.002">
+    </testcase>
+    <testcase classname="Injectables Instantiates Properly" name="Injectables Instantiates Properly" time="0.001">
+    </testcase>
+    <testcase classname="Injectables Registers itself onto the registry upon Instantiation" name="Injectables Registers itself onto the registry upon Instantiation" time="0.001">
+    </testcase>
+    <testcase classname="Injectables Handles more than one Injectable" name="Injectables Handles more than one Injectable" time="0.001">
+    </testcase>
+    <testcase classname="Injectables Gets Injected Properly" name="Injectables Gets Injected Properly" time="0.001">
+    </testcase>
+    <testcase classname="Injectables Gets transformer Properly" name="Injectables Gets transformer Properly" time="0.001">
+    </testcase>
+    <testcase classname="Injectables Responds to category as an injectable" name="Injectables Responds to category as an injectable" time="0.001">
+    </testcase>
+    <testcase classname="Injectables Responds to category while injected" name="Injectables Responds to category while injected" time="0">
+    </testcase>
+    <testcase classname="Injectables Injects according to a defined object" name="Injectables Injects according to a defined object" time="0">
+    </testcase>
+    <testcase classname="Injectables Changes Registry" name="Injectables Changes Registry" time="0.001">
+    </testcase>
+    <testcase classname="Injectables injects fresh instances when configured" name="Injectables injects fresh instances when configured" time="0.002">
+    </testcase>
+  </testsuite>
+</testsuites>
