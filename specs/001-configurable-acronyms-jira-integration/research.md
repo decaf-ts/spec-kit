@@ -1,3 +1,78 @@
+# research.md
+
+This document captures research decisions and rationale required to resolve
+previous "NEEDS CLARIFICATION" markers and to ground Phase 1 design.
+
+## Decision: Languages & Runtime
+
+- Decision: Use Node.js >=20 as the primary runtime for repository tooling and
+  CLI features; continue Python >=3.11 support for `specify` CLI utilities.
+- Rationale: `package.json` declares Node >=20 and `pyproject.toml` declares
+  Python >=3.11. Maintaining both covers JS/TS-first tooling and the existing
+  `specify` Python CLI.
+- Alternatives considered: Single-language rewrite (all-Node or all-Python). Rejected
+  due to high migration cost and existing tooling/tests in both ecosystems.
+
+## Decision: MCP & Jira integration
+
+- Decision: All Jira/auth/agent orchestration will use `@decaf-ts/mcp-server`.
+- Rationale: Constitution mandates MCP usage; spec explicitly references the
+  Decaf MCP server. Using MCP ensures consistent authentication, auditing, and
+  tool discovery.
+- Alternatives: Direct Jira API calls from CLI. Rejected because it violates
+  constitution principle I and disperses authentication logic.
+
+## Decision: Storage & Persistence
+
+- Decision: Persist acronym configuration and branch mapping in
+  `memory/constitution.md` (file-based). No external DB required.
+- Rationale: Feature is configuration-oriented and repository-local. Constitution
+  already uses `memory/constitution.md` for governance artifacts.
+
+## Decision: Templates & Placeholders
+
+- Decision: Update templates to use dynamic placeholders such as
+  `{{ACRONYM:Requirement}}-{{NUMBER}}` and provide a small template resolver
+  utility in the CLI to render placeholders during generation/migration.
+- Rationale: This avoids hard-coded acronyms and facilitates runtime substitution
+  during `speckit.updateAcronyms` and new spec generation.
+
+## Decision: Update Flow Behaviour
+
+- Decision: `speckit.updateAcronyms` will offer `--dry-run` (default for CI/tests),
+  `--apply` for interactive mode, and `--branch <name>` to customize branch name.
+  When `--apply` is used and files change, the command creates a feature branch
+  (default `chore/update-acronyms` with timestamp suffix), commits changes, and
+  writes a constitution version bump entry in `memory/constitution.md`.
+- Rationale: Matches requirements ACR-007 and ACR-008 and ensures atomic change
+  sets for review.
+
+## Decision: Branch Naming & Jira Mapping
+
+- Decision: Branch naming enforcement will prefer using a Jira key (when
+  available) and otherwise fall back to local sequence numbers. A mapping
+  `Acronym -> JiraIssueType` will be stored in constitution and used to request
+  Jira issue creation via MCP.
+- Rationale: Aligns with acceptance criteria and decisions in the spec.
+
+## Tests & Validation
+
+- Decision: Provide unit tests for the placeholder resolver, dry-run file
+  scanning logic (sample templates & spec files), and integration tests for the
+  branch/commit flow using a temporary Git repo fixture. Use `jest` (Node) and
+  pytest for Python-side utilities where applicable.
+- Rationale: Tests are required by constitution quality gates and ensure safe
+  migrations.
+
+## MCP Discovery & Outstanding Checks
+
+- Action: Run an MCP discovery step in Phase 0 to enumerate allowed persistence
+  and UI frameworks. This confirms Principle II compliance.
+
+---
+
+All of the above resolves the prior NEEDS CLARIFICATION entries in the plan and
+provides concrete guidance for Phase 1 design and contract generation.
 # Research: Technical Clarifications
 
 This document resolves the `NEEDS CLARIFICATION` items from the implementation plan's Technical Context for the "Configurable Acronyms & Jira Integration" feature.

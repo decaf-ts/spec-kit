@@ -11,27 +11,57 @@
 
 ## Technical Context
 
-<!--
-  ACTION REQUIRED: Replace the content in this section with the technical details
-  for the project. The structure here is presented in advisory capacity to guide
-  the iteration process.
--->
+Based on the repository contents and the feature scope, the following technical
+context is chosen. Any deviations require explicit justification in the
+Constitution Check section.
 
-**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]  
-**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]  
-**Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]  
-**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]  
-**Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
-**Project Type**: [single/web/mobile - determines source structure]  
-**Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
-**Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
-**Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
+- **Language/Version**: Node.js >=20 (primary repo tooling & CLI) and Python >=3.11
+  (for `specify` CLI utilities). These are inferred from `package.json` (engines)
+  and `pyproject.toml`.
+- **Primary Dependencies**: `@decaf-ts/mcp-server` (MCP orchestration and Jira
+  integrations), Node tooling (jest, eslint), and `typer`/`rich` on the Python
+  side for CLI interactions. Templates remain markdown-based.
+- **Storage**: File-based memory under `memory/` and `.specify/memory/` (e.g.,
+  `memory/constitution.md`). No external DB required for this feature.
+- **Testing**: `jest` for JS/TS unit and integration tests; Python tests (if any)
+  use `pytest`. The update flow must include tests for dry-run and apply modes.
+- **Target Platform**: Linux (CI and developer machines). Cross-platform
+  compatibility is desirable but Linux is primary for CI validation.
+- **Project Type**: CLI / library (tooling to run within consumer projects). The
+  implementation will be packaged as CLI command(s) and library functions.
+- **Performance Goals**: Not performance sensitive; operations are file I/O and
+  network calls to Jira/MCP. Target: responsive UX (sub-second local ops), and
+  reasonable batch update throughput (able to scan ~100 files in < 30s dry-run
+  on typical dev machines).
+- **Constraints**: Must obey constitution rules (no automated edits to source
+  outside allowed directories without explicit approval). All MCP interactions
+  must use `@decaf-ts/mcp-server` per constitution.
+- **Scale/Scope**: Feature applies to repository-level docs and templates; expected
+  to operate on projects of small-to-medium size (tens-to-low-hundreds of spec
+  files) for the migration flow.
 
 ## Constitution Check
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+Gates (evaluated against `.specify/memory/constitution.md`):
+
+1. MCP usage (Principle I): PASS — Design mandates `@decaf-ts/mcp-server` for
+  Jira/auth orchestration and discovery. All agent/Jira interactions will be
+  performed through the MCP server.
+2. Framework-supported tech only (Principle II): PASS (provisional) — chosen
+  technologies (Node >=20, Python >=3.11, `@decaf-ts/*` libs) are consistent
+  with the Decaf ecosystem. Final compliance requires an MCP discovery step to
+  enumerate allowed persistence/UI frameworks; this will be performed in Phase 0
+  and any deviation will be documented as an exception.
+3. Controlled file modifications (Principle IV): PASS — the update flow will
+  default to `--dry-run` and require explicit confirmation before applying
+  edits; modifications to code outside `templates/` and `.specify/memory/` will
+  require a manual approval step recorded in the plan/PR.
+
+Result: Gate checks PASS provisionally. Phase 0 research will run MCP discovery
+to finalize permitted technologies and confirm there are no constitution
+violations. Any unresolved violation will block Phase 0->Phase 1 progression.
 
 ## Project Structure
 
