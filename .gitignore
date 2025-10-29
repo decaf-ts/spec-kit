@@ -43,3 +43,17 @@ env/
 .genreleases/
 *.zip
 sdd-*/
+
+# Node / JS
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+dist/
+build/
+coverage/
+.parcel-cache/
+
+# Logs and local env
+*.log*
+.env.*
