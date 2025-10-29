@@ -74,17 +74,22 @@ Below you may define the acronyms used for major artefact types. If you leave an
 
 ## Branch Naming Convention
 
-Branch naming is configurable. Define which artifact acronym should be used as the canonical branch prefix. The enforced pattern is: `<ACRONYM>-<ISSUE_OR_SEQUENCE>` where `<ACRONYM>` is one of the configured acronyms above. Teams should prefer using a Jira key where possible.
+Branch naming is configurable and intended to align with Jira. The canonical branch name for work items shall be the Jira issue key (for example `PROJ-123`). SpecKit enforces that branches used for Specs, Features, and other tracked artefacts match the configured Acronym → Jira mapping and a valid issue key or sequence.
+
+Teams may define an explicit mapping from Acronym → Jira project/key in the constitution. When a mapping exists, SpecKit will prefer the Jira issue key as the branch name and will validate branch creation/checkouts against this rule.
 
 Example configuration entry (to be machine-readable in memory):
 
 ```
 BranchConfig:
-	branchAcronym: "FTR"        # Which acronym is used as the branch prefix
-	enforcePattern: "{ACRONYM}-{NUMBER_OR_JIRAKEY}"
+	branchAcronym: "FTR"        # Which acronym is preferred as the human-facing artifact label
+	enforcePattern: "{JIRAKEY}"  # Branch names must be the JIRA issue key when available
+	allowAliasMapping: true        # If true, the ACRONYM -> JIRA project key mapping is used to translate
 ```
 
-Changing the branch naming configuration is an amendment to the Constitution and must be recorded in the amendment log (see Governance).
+Renaming existing branches is a potentially destructive operation. By default SpecKit will NOT rename existing branches during an acronym update. The acronym update command offers an opt-in, interactive renaming mode that proposes per-branch renames and requires explicit confirmation.
+
+Changing the branch naming configuration is an amendment to the Constitution and must be recorded in the amendment log (see Governance). When an amendment is applied that changes branch naming, the constitution version MUST be incremented.
 
 ## Tools & Integrations
 
@@ -94,5 +99,5 @@ Use this section to declare available integrations and tools. By default SpecKit
 - CI/CD: `github-actions-spec-kit` (or project-specific pipelines)
 
 
-**Version**: 1.1.0 | **Ratified**: 2025-10-28 | **Last Amended**: 2025-10-28
+**Version**: 1.2.0 | **Ratified**: 2025-10-28 | **Last Amended**: 2025-10-28
 <!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->

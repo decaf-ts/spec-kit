@@ -1,0 +1,17 @@
+node_modules/
+dist/
+build/
+coverage/
+.parcel-cache/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+.env
+.env.*
+.specify/
+.specify/memory/
+.vscode/
+.idea/
+.DS_Store
+*.log
+*.min.js

@@ -65,5 +65,8 @@
   "homepage": "https://github.com/decaf-ts/spec-kit#readme",
   "devDependencies": {
     "@decaf-ts/utils": "latest"
+  },
+  "dependencies": {
+    "@decaf-ts/mcp-server": "latest"
   }
 }

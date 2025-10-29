@@ -2,6 +2,13 @@
 
 <!-- markdownlint-disable MD024 -->
 
+## [Unreleased] - 2025-10-29
+
+### Added
+
+- Acronym configuration and repository-wide update flow: interactive `configureAcronyms`, `updateAcronyms --dry-run`, and `updateAcronyms --apply` (creates a single branch + commit). See `docs/quickstart.md` and `specs/001-configurable-acronyms-jira-integration/notes/migration-notes.md` for rollout guidance.
+
+
 All notable changes to the Specify CLI and templates are documented here.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),

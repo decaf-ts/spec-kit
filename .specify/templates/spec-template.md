@@ -5,6 +5,14 @@
 **Status**: Draft  
 **Input**: User description: "$ARGUMENTS"
 
+## Constitution Compliance (required)
+
+This specification MUST include a short Constitution Compliance section that
+lists which project principles apply (e.g., Code Quality, Tests, Security)
+and how the feature will satisfy them (evidence references such as tests,
+docs, or CI links). Add this section before planning/implementation to
+ensure automated checks can validate compliance.
+
 ## User Scenarios & Testing *(mandatory)*
 
 <!--

@@ -1,4 +1,4 @@
-.github
+/.github
 /bin
 /src
 /docs
@@ -13,3 +13,21 @@ mdCompile.json
 nodemon.json
 tsconfig.json
 .codex
+
+# Common build / local files
+node_modules/
+dist/
+build/
+coverage/
+.parcel-cache/
+.env
+.env.*
+
+# Specify memory/config
+.specify/
+.specify/memory/
+
+# Lockfiles
+package-lock.json
+yarn.lock
+pnpm-lock.yaml

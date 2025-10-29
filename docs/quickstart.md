@@ -121,3 +121,33 @@ implement specs/002-create-taskify/plan.md
 - Read the complete methodology for in-depth guidance
 - Check out more examples in the repository
 - Explore the source code on GitHub
+
+## Acronym Configuration & Repository-wide Updates
+
+Spec Kit includes utilities to configure repository-level acronyms and safely apply replacements across templates and spec files.
+
+1. Configure acronyms interactively (suggested):
+
+```bash
+# interactive CLI (suggests defaults and persists to .specify/memory/constitution.md)
+node ./src/cli/configureAcronyms.ts --apply
+```
+
+2. Preview replacements (dry-run) across the repository:
+
+```bash
+# produces specs/001-configurable-acronyms-jira-integration/update-acronyms-dryrun.json
+node ./src/cli/updateAcronyms.ts --dry-run --target .
+```
+
+3. Apply replacements (creates a single branch + commit):
+
+```bash
+# WARNING: apply modifies files in the repo. Use only after reviewing dry-run.
+node ./src/cli/updateAcronyms.ts --apply --branch="chore/update-acronyms-$(date +%s)"
+```
+
+Safety notes:
+- The default workflow encourages `--dry-run` first and an explicit `--apply` to change files.
+- The CLI creates a single branch and commit for all changes to make review easy.
+- If your repository uses MCP/Jira integration, ensure MCP discovery completes before running `--apply` for operations that require Jira interaction.

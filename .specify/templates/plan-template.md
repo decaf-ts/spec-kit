@@ -31,7 +31,18 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+The Constitution defines the gates that must be validated before research or
+implementation begins. At minimum, confirm the following (adapt per-feature):
+
+- Code Quality: CI/linting passes and the plan documents any exceptions.
+- Tests: An acceptance test or test plan for the primary user scenario is present.
+- Documentation: Spec/quickstart updated to reflect the planned behavior.
+- Security: Any security-sensitive areas include a checklist and notes.
+- Observability: Long-running components include logging/health considerations.
+
+Record the results of this check in the plan and attach evidence (CI links,
+security checklist, test plan, or design notes). If any gate fails, justify
+the deviation and include mitigation steps.
 
 ## Project Structure
 
