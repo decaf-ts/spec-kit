@@ -25,7 +25,7 @@ venv/
 ENV/
 env/
 .venv
-
+/.token
 # IDE
 .vscode/
 .idea/
