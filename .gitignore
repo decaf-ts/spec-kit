@@ -1,4 +1,3 @@
-/lib
 /dist
 /docs
 /workdocs/drawings/*
@@ -33,7 +32,6 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
 lib64/
 parts/
 sdist/
@@ -48,7 +46,6 @@ venv/
 ENV/
 env/
 .venv
-/.token
 # IDE
 .vscode/
 .idea/
